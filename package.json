@@ -1,0 +1,7 @@
+{
+  "name": "ackee-blockchain-fuzzing-workshop",
+  "dependencies": {
+    "@openzeppelin/contracts": "4.9.3"
+  },
+  "scripts": {}
+}

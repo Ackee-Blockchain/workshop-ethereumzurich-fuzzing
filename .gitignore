@@ -1,0 +1,21 @@
+**/*.DS_Store
+node_modules
+.env
+.vscode
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Foundry files
+cache
+build
+artifacts
+out
+
+# Wake
+wake.secret.toml
+.wake
+pytypes
+.pytest_cache
+__pycache__
