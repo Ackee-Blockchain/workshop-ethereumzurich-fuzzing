@@ -118,7 +118,8 @@ contract Order is IERC1271, AssetRecoverer {
 
         // Approval is set to the maximum value of uint256 as the contract is intended for single-use only.
         // This eliminates the need for subsequent approval calls, optimizing for gas efficiency in one-time transactions.
-        IERC20(tokenFrom).forceApprove(RELAYER, type(uint256).max);
+        // wake-disable-next-line
+        IERC20(tokenFrom).approve(RELAYER, type(uint256).max);
 
         emit OrderCreated(address(this), orderHash, order);
     }

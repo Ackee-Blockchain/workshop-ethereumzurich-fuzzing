@@ -3,12 +3,12 @@ from typing import Dict, Tuple, Union
 
 from wake.testing import *
 from wake.testing.fuzzing import *
-from .market import Market
+from .lib.market import Market
 
 from pytypes.contracts.AmountConverter import AmountConverter
 from pytypes.contracts.Order import Order
 from pytypes.contracts.Stonks import Stonks
-from pytypes.openzeppelin.contracts.token.ERC20.extensions.IERC20Metadata import IERC20Metadata
+from pytypes.node_modules.openzeppelin.contracts.token.ERC20.extensions.IERC20Metadata import IERC20Metadata
 
 
 # Decimals: 18
@@ -210,9 +210,10 @@ class StonksTest(FuzzTest):
             return
         # Otherwise, the order should be placed successfully
         else:
+            # Call the function
             tx = self.stonks[(sell_token, buy_token)].placeOrder(min_buy_amount)
 
-            # We validate events
+            # Validate events
             e = next(e for e in tx.events if isinstance(e, Order.OrderCreated))
             order = Order(e.order)
             order_hash = e.orderHash
