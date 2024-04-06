@@ -2,7 +2,7 @@
 
 pragma solidity 0.8.23;
 
-import {AmountConverter} from "../contracts/AmountConverter.sol";
+import {AmountConverter} from "../../contracts/AmountConverter.sol";
 
 contract Market {
     AmountConverter public immutable amountConverter;
