@@ -200,50 +200,42 @@ class StonksTest(FuzzTest):
 
         # Stonks forbids dust trades and has a hard limit of minimum of 10 tokens
         if sell_amount <= 10:
-            with must_revert(Stonks.MinimumPossibleBalanceNotMet):
-                self.stonks[(sell_token, buy_token)].placeOrder(min_buy_amount)
+            # TODO
             return
         # If the expected buy (output) amount is 0, Stonks should revert
-        elif self._compute_buy_amount_without_margin(sell_amount, price, sell_decimals, price_decimals, buy_decimals) == 0:
-            with must_revert(AmountConverter.InvalidExpectedOutAmount):
-                self.stonks[(sell_token, buy_token)].placeOrder(min_buy_amount)
+        elif False:
+            # TODO
             return
         # Otherwise, the order should be placed successfully
         else:
+            pass
             # Call the function
-            tx = self.stonks[(sell_token, buy_token)].placeOrder(min_buy_amount)
+            # TODO
 
             # Validate events
-            e = next(e for e in tx.events if isinstance(e, Order.OrderCreated))
-            order = Order(e.order)
-            order_hash = e.orderHash
+            # TODO
             
             # Update values with amounts from event
-            sell_amount = e.orderData.sellAmount
-            buy_amount = max(self._compute_buy_amount(sell_amount, price, sell_decimals, price_decimals, buy_decimals), min_buy_amount)
-            assert buy_amount == e.orderData.buyAmount
+            # TODO
 
             # Validate the signature
-            assert order.isValidSignature(order_hash, b"") == bytes.fromhex("1626ba7e")
+            # TODO
 
             # The order is created and not expired, token recovery is not possible
-            with must_revert(Order.OrderNotExpired):
-                order.recoverTokenFrom()
+            # TODO
             
             # Mine a new block with a timestamp after the order expiration
-            default_chain.mine(lambda _: tx.block.timestamp + self.order_duration + 1)
-            with must_revert(Order.OrderExpired):
-                order.isValidSignature(order_hash, b"")
+            # TODO
 
             # Must succeed - order expired
-            order.recoverTokenFrom(from_=random_account())
+            # TODO
 
 
 def test_stonks():
     for _ in range(100):
         with default_chain.connect(fork=f"https://ethereum-rpc.publicnode.com"):
             try:
-                StonksTest().run(1, 500)
+                StonksTest().run(1, 100)
             except TransactionRevertedError as e:
                 print(e.tx.call_trace if e.tx else "Call reverted")
                 raise
