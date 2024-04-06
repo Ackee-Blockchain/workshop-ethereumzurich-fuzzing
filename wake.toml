@@ -1,9 +1,6 @@
-[api_keys]
-ALCHEMY_MAINNET = "op://ABCH.dev/alchemy-ethereumzuri.ch-2024-workshop/credential"
-
 [compiler.solc]
 include_paths = ["node_modules", "lib"]
-exclude_paths = ["node_modules", "lib"]
+exclude_paths = ["node_modules", "lib", "tests"]
 remappings = [
     "@openzeppelin/=node_modules/@openzeppelin/",
     "forge-std/=lib/forge-std/src/",
